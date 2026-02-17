@@ -1,0 +1,152 @@
+.sidebar {
+  width: 240px;
+  min-width: 240px;
+  padding: 1.5rem 1rem 2rem;
+  border-right: 1px solid #e5e5e5;
+  background: #fff;
+  overflow-y: visible;
+}
+
+.filterGroup {
+  margin-bottom: 1.5rem;
+}
+
+.filterTitle {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #333;
+  margin: 0 0 0.75rem 0;
+}
+
+.filterContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.optionLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #444;
+}
+
+.optionLabel input {
+  accent-color: #1e3a5f;
+}
+
+.sizeGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.35rem;
+}
+
+.sizeBtn,
+.widthBtn {
+  padding: 0.4rem 0.35rem;
+  border: 1px solid #ccc;
+  background: #fff;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border-radius: 2px;
+  min-width: 0;
+}
+
+.sizeBtn:hover,
+.widthBtn:hover {
+  border-color: #1e3a5f;
+  color: #1e3a5f;
+}
+
+.sizeBtnActive,
+.widthBtnActive {
+  border-color: #1e3a5f;
+  background: #1e3a5f;
+  color: #fff;
+}
+
+.widthGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.35rem;
+}
+
+.linkBtn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.25rem 0;
+  border: none;
+  background: none;
+  font-size: 0.9rem;
+  color: #444;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.linkBtn:hover {
+  color: #1e3a5f;
+  text-decoration: underline;
+}
+
+.linkBtnActive {
+  color: #1e3a5f;
+  font-weight: 600;
+}
+
+.specialLink {
+  font-size: 0.9rem;
+  color: #1e3a5f;
+  text-decoration: underline;
+}
+
+.specialLink:hover {
+  text-decoration: none;
+}
+
+.colorGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.4rem;
+}
+
+.colorBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0;
+  border: none;
+  background: none;
+  font-size: 0.85rem;
+  color: #444;
+  cursor: pointer;
+  text-align: left;
+}
+
+.colorBtn:hover {
+  color: #1e3a5f;
+}
+
+.colorBtnActive .colorLabel {
+  font-weight: 600;
+  color: #1e3a5f;
+}
+
+.colorSwatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color, #ccc);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+}
+
+.colorLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

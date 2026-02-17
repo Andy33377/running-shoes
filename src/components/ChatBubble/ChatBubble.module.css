@@ -1,0 +1,28 @@
+.bubble {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #1e3a5f;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(30, 58, 95, 0.4);
+  text-decoration: none;
+  z-index: 1000;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.bubble:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(30, 58, 95, 0.5);
+}
+
+.icon {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
