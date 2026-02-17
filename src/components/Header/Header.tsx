@@ -1,9 +1,19 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store/store";
+import { selectCartDistinctCount } from "../../store/cartSlice";
 import { navItems } from "../../data/mockData";
 import styles from "./Header.module.css";
 
-export function Header() {
+type HeaderProps = {
+  onCartClick?: () => void;
+};
+
+export function Header({ onCartClick }: HeaderProps) {
   const [search, setSearch] = useState("");
+  const count = useSelector((state: RootState) =>
+    selectCartDistinctCount(state)
+  );
 
   return (
     <header className={styles.header}>
@@ -47,6 +57,7 @@ export function Header() {
           type="button"
           className={styles.cartButton}
           aria-label="Open cart"
+          onClick={() => onCartClick?.()}
         >
           <img
             src="/images/basket.svg"
@@ -54,6 +65,7 @@ export function Header() {
             className={styles.cartIcon}
             aria-hidden="true"
           />
+          {count > 0 && <span className={styles.cartBadge}>{count}</span>}
         </button>
       </div>
     </header>

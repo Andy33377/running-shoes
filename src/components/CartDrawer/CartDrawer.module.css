@@ -1,0 +1,187 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: flex-end;
+  z-index: 300;
+}
+
+.drawer {
+  width: min(420px, 100%);
+  height: 100%;
+  background: #fff;
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.itemsCount {
+  font-weight: 400;
+  color: #666;
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.closeButton {
+  border: none;
+  background: none;
+  font-size: 0.9rem;
+  color: #333;
+  cursor: pointer;
+}
+
+.closeButton:hover {
+  text-decoration: underline;
+}
+
+.shippingBlock {
+  padding: 0.75rem 1.5rem 1rem;
+}
+
+.shippingText {
+  font-size: 0.85rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.progressBar {
+  height: 4px;
+  background: #e5e5e5;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progressFill {
+  width: 15%;
+  height: 100%;
+  background: #56b280;
+}
+
+.body {
+  padding: 1.5rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.itemsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.itemRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.itemImageWrap {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.itemImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.itemInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.itemName {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.itemMeta {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.emptyState {
+  text-align: left;
+}
+
+.emptyTitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem 0;
+}
+
+.linkRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.linkButton {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1e3a5f;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.footer {
+  border-top: 1px solid #e5e5e5;
+  padding: 1rem 1.5rem 1.25rem;
+}
+
+.subtotalRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.checkoutButton {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  border: none;
+  background: #f5f5f5;
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: not-allowed;
+  margin-bottom: 0.5rem;
+}
+
+.guarantee {
+  font-size: 0.8rem;
+  color: #777;
+  margin: 0;
+}

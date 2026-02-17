@@ -4,98 +4,97 @@ import styles from "./Footer.module.css";
 export function Footer() {
   return (
     <footer className={styles.footer}>
-      <div className={styles.shippingBlock}>
-        <FreeShippingBlock />
-      </div>
-      <div className={styles.columns}>
-        <div className={styles.column}>
-          <h3 className={styles.columnTitle}>Fleet Feet</h3>
-          <ul className={styles.links}>
-            {footerLinks.fleetFeet.map((label) => (
-              <li key={label}>
-                <a href="/">{label}</a>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className={styles.column}>
-          <h3 className={styles.columnTitle}>Own a Franchise</h3>
-          <ul className={styles.links}>
-            {footerLinks.franchise.map((label) => (
-              <li key={label}>
-                <a href="/">{label}</a>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className={styles.column}>
-          <h3 className={styles.columnTitle}>Help & More</h3>
-          <ul className={styles.links}>
-            {footerLinks.help.map((label) => (
-              <li key={label}>
-                <a href="/">{label}</a>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className={styles.column}>
-          <h3 className={styles.columnTitle}>
-            Join our newsletter for the latest deals, events and more.
-          </h3>
-          <form
-            className={styles.newsletter}
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <input
-              type="email"
-              placeholder="Email Address (required)"
-              className={styles.emailInput}
-              required
-            />
-            <button
-              type="submit"
-              className={styles.submitBtn}
-              aria-label="Subscribe"
+      <div className={styles.footerInner}>
+        <div className={styles.columns}>
+          <div className={styles.column}>
+            <h3 className={styles.columnTitle}>Fleet Feet</h3>
+            <ul className={styles.links}>
+              {footerLinks.fleetFeet.map((label) => (
+                <li key={label}>
+                  <a href="/">{label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className={styles.column}>
+            <h3 className={styles.columnTitle}>Own a Franchise</h3>
+            <ul className={styles.links}>
+              {footerLinks.franchise.map((label) => (
+                <li key={label}>
+                  <a href="/">{label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className={styles.column}>
+            <h3 className={styles.columnTitle}>Help & More</h3>
+            <ul className={styles.links}>
+              {footerLinks.help.map((label) => (
+                <li key={label}>
+                  <a href="/">{label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className={styles.column}>
+            <h3 className={styles.columnTitle}>
+              Join our newsletter for the latest deals, events and more.
+            </h3>
+            <form
+              className={styles.newsletter}
+              onSubmit={(e) => e.preventDefault()}
             >
-              →
-            </button>
-          </form>
-          <div className={styles.social}>
-            <a href="/" aria-label="Facebook">
-              <img
-                src="/images/facebook.svg"
-                alt=""
-                className={styles.socialIcon}
+              <input
+                type="email"
+                placeholder="Email Address (required)"
+                className={styles.emailInput}
+                required
               />
-            </a>
-            <a href="/" aria-label="Instagram">
-              <img
-                src="/images/inst.svg"
-                alt=""
-                className={styles.socialIcon}
-              />
-            </a>
-            <a href="/" aria-label="LinkedIn">
-              <img
-                src="/images/linked.svg"
-                alt=""
-                className={styles.socialIcon}
-              />
-            </a>
-            <a href="/" aria-label="X (Twitter)">
-              <img
-                src="/images/twitter.svg"
-                alt=""
-                className={styles.socialIcon}
-              />
-            </a>
-            <a href="/" aria-label="YouTube">
-              <img
-                src="/images/youtube.svg"
-                alt=""
-                className={styles.socialIcon}
-              />
-            </a>
+              <button
+                type="submit"
+                className={styles.submitBtn}
+                aria-label="Subscribe"
+              >
+                →
+              </button>
+            </form>
+            <div className={styles.social}>
+              <a href="/" aria-label="Facebook">
+                <img
+                  src="/images/facebook.svg"
+                  alt=""
+                  className={styles.socialIcon}
+                />
+              </a>
+              <a href="/" aria-label="Instagram">
+                <img
+                  src="/images/inst.svg"
+                  alt=""
+                  className={styles.socialIcon}
+                />
+              </a>
+              <a href="/" aria-label="LinkedIn">
+                <img
+                  src="/images/linked.svg"
+                  alt=""
+                  className={styles.socialIcon}
+                />
+              </a>
+              <a href="/" aria-label="X (Twitter)">
+                <img
+                  src="/images/twitter.svg"
+                  alt=""
+                  className={styles.socialIcon}
+                />
+              </a>
+              <a href="/" aria-label="YouTube">
+                <img
+                  src="/images/youtube.svg"
+                  alt=""
+                  className={styles.socialIcon}
+                />
+              </a>
+            </div>
           </div>
         </div>
       </div>

@@ -11,3 +11,4 @@ export { InfoSection } from "./InfoSection/InfoSection";
 export { FreeShipping } from "./FreeShipping/FreeShipping";
 export { Footer } from "./Footer/Footer";
 export { ChatBubble } from "./ChatBubble/ChatBubble";
+export { CartDrawer } from "./CartDrawer/CartDrawer";

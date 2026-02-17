@@ -476,8 +476,7 @@ export const footerLinks = {
 };
 
 export const infoLinks = [
-  { label: "How Should Running Shoes Fit?", href: "#fit" },
-  { label: "Types of Running Shoes", href: "#types" },
-  { label: "Do I Need Stability Shoes?", href: "#stability" },
   { label: "Free Shipping & Returns", href: "#shipping" },
+  { label: "Do I Need Stability Shoes?", href: "#stability" },
+  { label: "Types of Running Shoes", href: "#types" },
 ];

@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useMemo, useState } from "react";
 import {
   Header,
   Breadcrumbs,
@@ -8,49 +8,98 @@ import {
   ProductGrid,
   Pagination,
   InfoSection,
+  FreeShipping,
   Footer,
   ChatBubble,
+  CartDrawer,
 } from "../components";
-import { products, infoLinks } from "../data/mockData";
-import type { AppliedFilter, SortOption } from "../types";
+import { products } from "../data/mockData";
+import type { AppliedFilter } from "../types";
 import styles from "./CatalogPage.module.css";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../store/store";
+import {
+  setGender,
+  toggleSize,
+  toggleType,
+  toggleBrand,
+  togglePriceRange,
+  setSort,
+  setPage,
+} from "../store/catalogFiltersSlice";
 
 const PRODUCTS_PER_PAGE = 12;
 
 export function CatalogPage() {
-  const [selectedGender, setSelectedGender] = useState<string | undefined>();
-  const [selectedSizes, setSelectedSizes] = useState<number[]>([]);
-  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
-  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
-  const [selectedPriceRanges, setSelectedPriceRanges] = useState<string[]>([]);
-  const [sortBy, setSortBy] = useState<SortOption>("popular");
-  const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const {
+    selectedGender,
+    selectedSizes,
+    selectedTypes,
+    selectedBrands,
+    selectedPriceRanges,
+    sortBy,
+    page,
+  } = useSelector((state: RootState) => state.catalogFilters);
+
+  const removeFilter = (key: string, value: string) => {
+    if (key === "gender") dispatch(setGender(undefined));
+    else if (key === "size") dispatch(toggleSize(Number(value)));
+    else if (key === "type") {
+      value.split(", ").forEach((v) => dispatch(toggleType(v.trim())));
+    } else if (key === "brand") {
+      value.split(", ").forEach((v) => dispatch(toggleBrand(v.trim())));
+    } else if (key === "price") {
+      value.split(", ").forEach((v) => dispatch(togglePriceRange(v.trim())));
+    }
+    dispatch(setPage(1));
+  };
 
   const appliedFilters = useMemo((): AppliedFilter[] => {
     const list: AppliedFilter[] = [];
-    if (selectedGender)
-      list.push({ key: "gender", label: "Gender", value: selectedGender });
-    selectedSizes.forEach((s) =>
-      list.push({ key: "size", label: "Size", value: String(s) })
+
+    if (selectedGender) {
+      list.push({
+        key: "gender",
+        label: "Gender",
+        value: selectedGender,
+      });
+    }
+
+    selectedSizes.forEach((size) =>
+      list.push({
+        key: "size",
+        label: "Size",
+        value: String(size),
+      }),
     );
-    if (selectedTypes.length)
+
+    if (selectedTypes.length) {
       list.push({
         key: "type",
         label: "Type",
         value: selectedTypes.join(", "),
       });
-    if (selectedBrands.length)
+    }
+
+    if (selectedBrands.length) {
       list.push({
         key: "brand",
         label: "Brand",
         value: selectedBrands.join(", "),
       });
-    if (selectedPriceRanges.length)
+    }
+
+    if (selectedPriceRanges.length) {
       list.push({
         key: "price",
         label: "Price",
         value: selectedPriceRanges.join(", "),
       });
+    }
+
     return list;
   }, [
     selectedGender,
@@ -60,67 +109,48 @@ export function CatalogPage() {
     selectedPriceRanges,
   ]);
 
-  const toggleSize = (s: number) => {
-    setSelectedSizes((prev) =>
-      prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]
-    );
-    setPage(1);
-  };
-  const toggleType = (type: string) => {
-    setSelectedTypes((prev) =>
-      prev.includes(type) ? prev.filter((x) => x !== type) : [...prev, type]
-    );
-    setPage(1);
-  };
-  const toggleBrand = (brand: string) => {
-    setSelectedBrands((prev) =>
-      prev.includes(brand) ? prev.filter((x) => x !== brand) : [...prev, brand]
-    );
-    setPage(1);
-  };
-  const togglePriceRange = (id: string) => {
-    setSelectedPriceRanges((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
-    );
-    setPage(1);
-  };
-
-  const removeFilter = (key: string, value: string) => {
-    if (key === "gender") setSelectedGender(undefined);
-    else if (key === "size")
-      setSelectedSizes((prev) => prev.filter((s) => String(s) !== value));
-    else if (key === "type") setSelectedTypes([]);
-    else if (key === "brand") setSelectedBrands([]);
-    else if (key === "price") setSelectedPriceRanges([]);
-    setPage(1);
-  };
-
   const filteredProducts = useMemo(() => {
     let list = [...products];
-    if (selectedGender === "mens")
+
+    if (selectedGender === "mens") {
       list = list.filter((p) => p.name.startsWith("Men's"));
-    if (selectedGender === "womens")
+    }
+
+    if (selectedGender === "womens") {
       list = list.filter((p) => p.name.startsWith("Women's"));
+    }
 
     const hasTrail = selectedTypes.includes("Trail Running");
     const hasTrack = selectedTypes.includes("Track");
+
     if (hasTrail && !hasTrack) {
-      // только трейловые модели (id начинается с 't')
       list = list.filter((p) => p.id.startsWith("t"));
     } else if (hasTrack && !hasTrail) {
-      // только «дорожные»/трек — все из папки shoes (id не начинается с 't')
       list = list.filter((p) => !p.id.startsWith("t"));
     }
-    if (sortBy === "price-asc")
-      list.sort((a, b) => (a.priceRange?.min ?? 0) - (b.priceRange?.min ?? 0));
-    if (sortBy === "price-desc")
-      list.sort((a, b) => (b.priceRange?.max ?? 0) - (a.priceRange?.max ?? 0));
-    if (sortBy === "newest") list.reverse();
+
+    switch (sortBy) {
+      case "price-asc":
+        list.sort(
+          (a, b) => (a.priceRange?.min ?? 0) - (b.priceRange?.min ?? 0),
+        );
+        break;
+      case "price-desc":
+        list.sort(
+          (a, b) => (b.priceRange?.max ?? 0) - (a.priceRange?.max ?? 0),
+        );
+        break;
+      case "newest":
+        list.reverse();
+        break;
+    }
+
     return list;
-  }, [products, selectedGender, selectedTypes, sortBy]);
+  }, [selectedGender, selectedTypes, sortBy]);
 
   const totalPages =
     Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE) || 1;
+
   const paginatedProducts = useMemo(() => {
     const start = (page - 1) * PRODUCTS_PER_PAGE;
     return filteredProducts.slice(start, start + PRODUCTS_PER_PAGE);
@@ -128,7 +158,7 @@ export function CatalogPage() {
 
   return (
     <div className={styles.layout}>
-      <Header />
+      <Header onCartClick={() => setIsCartOpen(true)} />
       <Breadcrumbs />
 
       <div className={styles.body}>
@@ -138,70 +168,32 @@ export function CatalogPage() {
           selectedTypes={selectedTypes}
           selectedBrands={selectedBrands}
           selectedPriceRanges={selectedPriceRanges}
-          onGenderChange={setSelectedGender}
-          onSizeToggle={toggleSize}
-          onTypeClick={toggleType}
-          onBrandClick={toggleBrand}
-          onPriceRangeToggle={togglePriceRange}
+          onGenderChange={(gender) => dispatch(setGender(gender))}
+          onSizeToggle={(size) => dispatch(toggleSize(size))}
+          onTypeClick={(type) => dispatch(toggleType(type))}
+          onBrandClick={(brand) => dispatch(toggleBrand(brand))}
+          onPriceRangeToggle={(id) => dispatch(togglePriceRange(id))}
         />
 
         <main className={styles.main}>
           <h1 className={styles.pageTitle}>Running Shoes</h1>
-          <p className={styles.description}>
-            Running shoes come in all shapes and sizes. From thick-soled
-            maximalist trainers to light and fast racing flats, there are kicks
-            for every need—and every runner.
-          </p>
-          <div className={styles.infoLinks}>
-            {infoLinks.map((link) => (
-              <a key={link.label} href={link.href} className={styles.infoLink}>
-                {link.label}
-              </a>
-            ))}
-          </div>
 
           <div className={styles.toolbar}>
-            <div className={styles.filtersWrap}>
-              <AppliedFilters
-                filters={appliedFilters}
-                onRemove={removeFilter}
-              />
-            </div>
-            <div className={styles.sortWrap}>
-              <SortBy value={sortBy} onChange={setSortBy} />
-            </div>
+            <AppliedFilters filters={appliedFilters} onRemove={removeFilter} />
+            <SortBy
+              value={sortBy}
+              onChange={(value) => dispatch(setSort(value))}
+            />
           </div>
 
-          <div className={styles.productsSection}>
-            <ProductGrid products={paginatedProducts} />
-          </div>
+          <ProductGrid products={paginatedProducts} />
 
           <Pagination
             currentPage={page}
             hasNext={page < totalPages}
-            onNext={() => setPage((p) => Math.min(p + 1, totalPages))}
-            onPrev={() => setPage((p) => Math.max(p - 1, 1))}
+            onNext={() => dispatch(setPage(Math.min(page + 1, totalPages)))}
+            onPrev={() => dispatch(setPage(Math.max(page - 1, 1)))}
           />
-
-          <InfoSection id="fit" title="How Should Running Shoes Fit?">
-            <p>
-              Buying running shoes online can be hard. We&apos;re here to help
-              make it easier.
-            </p>
-            <p>
-              Finding the right pair is essential for comfortable, happy miles.
-              While nothing beats our unique, in-store outfitting process, we
-              can help you find the right gear for you from the comfort of your
-              home.
-            </p>
-            <p>
-              Just starting out? Purchase a pair built for everyday training.
-              Looking to break your PR? Shop for models tuned for speed.
-            </p>
-            <p>
-              Here are our top 5 tips for choosing the perfect running shoes:
-            </p>
-          </InfoSection>
 
           <InfoSection id="types" title="Types of Running Shoes">
             <ul>
@@ -222,11 +214,13 @@ export function CatalogPage() {
               cross country course.
             </p>
           </InfoSection>
+          <FreeShipping />
         </main>
       </div>
 
       <Footer />
       <ChatBubble />
+      <CartDrawer isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </div>
   );
 }
