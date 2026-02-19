@@ -3,7 +3,7 @@ export { Breadcrumbs } from "./Breadcrumbs/Breadcrumbs";
 export { Sidebar } from "./Sidebar/Sidebar";
 export { AppliedFilters } from "./AppliedFilters/AppliedFilters";
 export { SortBy } from "./SortBy/SortBy";
-export { ProductCard } from "./ProductCard/ProductCard";
+export { ProductCard } from "./ProductCart/ProductCart";
 export { CategoryCard } from "./CategoryCard/CategoryCard";
 export { ProductGrid } from "./ProductGrid/ProductGrid";
 export { Pagination } from "./Pagination/Pagination";

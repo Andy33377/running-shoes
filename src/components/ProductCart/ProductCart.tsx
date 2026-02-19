@@ -1,9 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../../store/store";
 import { addToCart, removeFromCart } from "../../store/cartSlice";
 import { selectCartItemById } from "../../store/cartSlice";
 import type { Product } from "../../types";
-import styles from "./ProductCard.module.css";
+import styles from "./ProductCart.module.css";
 
 interface ProductCardProps {
   product: Product;
