@@ -121,27 +121,3 @@ export function Footer() {
     </footer>
   );
 }
-
-function FreeShippingBlock() {
-  return (
-    <div className={styles.shippingContent}>
-      <img
-        src="/images/bg-runing-footer.jpg"
-        alt="Runner on a path"
-        className={styles.shippingImage}
-      />
-      <div className={styles.shippingTextBlock}>
-        <h2 className={styles.shippingTitle}>Free Shipping & Returns</h2>
-        <p className={styles.shippingText}>
-          Not sure about buying a new pair? Don&apos;t sweat it. Get free
-          shipping on orders over $99 when you shop on fleetfeet.com.
-        </p>
-        <p className={styles.shippingText}>
-          If you don&apos;t like how your new gear looks, fits or feels,
-          we&apos;ll take it back within 30 days. That&apos;s our Happy Fit
-          Guarantee.
-        </p>
-      </div>
-    </div>
-  );
-}

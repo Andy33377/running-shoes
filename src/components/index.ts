@@ -8,7 +8,7 @@ export { CategoryCard } from "./CategoryCard/CategoryCard";
 export { ProductGrid } from "./ProductGrid/ProductGrid";
 export { Pagination } from "./Pagination/Pagination";
 export { InfoSection } from "./InfoSection/InfoSection";
-export { FreeShipping } from "./FreeShipping/FreeShipping";
+
 export { Footer } from "./Footer/Footer";
 export { ChatBubble } from "./ChatBubble/ChatBubble";
 export { CartDrawer } from "./CartDrawer/CartDrawer";

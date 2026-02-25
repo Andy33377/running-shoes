@@ -8,7 +8,6 @@ import {
   ProductGrid,
   Pagination,
   InfoSection,
-  FreeShipping,
   Footer,
   ChatBubble,
   CartDrawer,
@@ -214,7 +213,6 @@ export function CatalogPage() {
               cross country course.
             </p>
           </InfoSection>
-          <FreeShipping />
         </main>
       </div>
 
