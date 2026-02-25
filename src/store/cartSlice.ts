@@ -41,7 +41,7 @@ const cartSlice = createSlice({
     // 3) Изменить количество товара на delta (+1 или -1)
     changeQty(
       state,
-      action: PayloadAction<{ productId: string; delta: number }>
+      action: PayloadAction<{ productId: string; delta: number }>,
     ) {
       const { productId, delta } = action.payload;
       const existing = state.items.find((item) => item.productId === productId);
@@ -52,7 +52,7 @@ const cartSlice = createSlice({
       // если стало 0 или меньше — удаляем из корзины
       if (existing.quantity <= 0) {
         state.items = state.items.filter(
-          (item) => item.productId !== productId
+          (item) => item.productId !== productId,
         );
       }
     },
